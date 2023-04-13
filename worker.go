@@ -48,6 +48,6 @@ func worker(S []int, N int) {
 			}
 			tran.Close(participants[i], participants[(i+1)%N], participants[(i+2)%N], participants[j])
 		}
-
 	}
+	wg.Done()
 }

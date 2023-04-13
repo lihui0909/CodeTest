@@ -3,12 +3,12 @@ package main
 import (
 	"fmt"
 	"sync"
-	"time"
 )
 
 var ijRecord []ij
 var idx int
 var recLock sync.Mutex
+var wg sync.WaitGroup
 
 type ij struct {
 	i int
@@ -30,12 +30,14 @@ func main() {
 	//ijRecord 用来记录worker中生成的随机i j的值
 	ijRecord = make([]ij, 3*N)
 	idx = 0
-
 	M = 3
+	wg = sync.WaitGroup{}
+	wg.Add(M)
+
 	for j := 0; j < M; j++ {
 		go worker(S[:], N)
 	}
-	time.Sleep(12 * time.Second)
+	wg.Wait()
 
 	//通过生成的ij记录进行测试，看并发修改的S是否与串行执行的S1结果相同
 	DPrintf(" i j 's record is  ： %+v", ijRecord)
