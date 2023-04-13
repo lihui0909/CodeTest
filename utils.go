@@ -27,8 +27,6 @@ func New() *Set {
 }
 
 func (s *Set) Add(items ...interface{}) error {
-	//s.lock.Lock()
-	//defer s.lock.Unlock()
 	for _, item := range items {
 		if s.Contains(item) {
 			continue
@@ -39,20 +37,14 @@ func (s *Set) Add(items ...interface{}) error {
 }
 
 func (s *Set) Contains(item interface{}) bool {
-	//s.lock.Lock()
-	//defer s.lock.Unlock()
 	_, ok := s.m[item]
 	return ok
 }
 func (s *Set) Size() int {
-	//s.lock.Lock()
-	//defer s.lock.Unlock()
 	return len(s.m)
 }
 
 func (s *Set) Remove(items ...interface{}) error {
-	//s.lock.Lock()
-	//defer s.lock.Unlock()
 	for _, item := range items {
 		if !s.Contains(item) {
 			continue

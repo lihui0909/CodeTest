@@ -27,6 +27,7 @@ func main() {
 		participants[i].tranIds = *New()
 	}
 
+	//ijRecord 用来记录worker中生成的随机i j的值
 	ijRecord = make([]ij, 3*N)
 	idx = 0
 
@@ -36,6 +37,7 @@ func main() {
 	}
 	time.Sleep(12 * time.Second)
 
+	//通过生成的ij记录进行测试，看并发修改的S是否与串行执行的S1结果相同
 	DPrintf(" i j 's record is  ： %+v", ijRecord)
 	S1 := make([]int, N)
 	for i := 0; i < N; i++ {

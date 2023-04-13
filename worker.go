@@ -35,6 +35,7 @@ func worker(S []int, N int) {
 				//提交阶段，直接执行
 				tmpSum := S[i] + S[(i+1)%N] + S[(i+2)%N]
 				S[j] = tmpSum
+				// 记录本次生成的i j
 				tempij := new(ij)
 				tempij.i = i
 				tempij.j = j

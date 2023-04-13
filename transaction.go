@@ -25,6 +25,7 @@ func (tc *TranCoordinator) begin() string {
 	return tc.id
 }
 
+// Prepare 事务协调者在准备阶段调用的方法，用来获取所有需要的锁
 func (tc *TranCoordinator) Prepare(p0 Participant, p1 Participant, p2 Participant, pj Participant) bool {
 	res0 := p0.readLock(tc.id)
 	res1 := p1.readLock(tc.id)
@@ -36,6 +37,7 @@ func (tc *TranCoordinator) Prepare(p0 Participant, p1 Participant, p2 Participan
 	return false
 }
 
+// Close 结束事务，释放所有的锁
 func (tc *TranCoordinator) Close(p0 Participant, p1 Participant, p2 Participant, pj Participant) {
 	DPrintf("close transaction %s!\n", tc.id)
 	p0.releaseRead(tc.id)
